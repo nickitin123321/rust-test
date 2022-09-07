@@ -1,10 +1,12 @@
-use std::io;
+use std::net::TcpListener;
 
 fn main() {
-    let mut guess = String::new();
-    io::stdin()
-    .read_line(&mut guess)
-    .expect("Failed to read line");
+  let listener = TcpListener::bind("127.0.0.1:7878").unwrap();
 
-    println!("You guessed: {guess}");
+    for stream in listener.incoming() {
+        let stream = stream.unwrap();
+
+        println!("Connection established!");
+    }
+
 }
